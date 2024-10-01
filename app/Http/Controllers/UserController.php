@@ -214,25 +214,24 @@ class UserController extends Controller
         $courses = Courses::where('department_id', $department_id)->get();
         return response()->json($courses);
     }
-
     public function getUsers(Request $request)
     {
         $role = $request->input('role');
         $search = $request->input('search');
         $rowsPerPage = $request->input('rowsPerPage', 10);
         $page = $request->input('page', 1);
-
+    
         $query = User::query()
                     ->join('roles', 'users.role_id', '=', 'roles.role_id')
                     ->select('users.*', 'roles.role_type');
-
+    
         // Exclude admin roles
-        $query->where('roles.role_type', '!=', 'admin');
-
+        $query->where('roles.role_type', '!=', 'admin')->where('is_deleted', 0);
+    
         if ($role) {
             $query->where('roles.role_type', $role);
         }
-
+    
         // Apply search filter
         if ($search) {
             $query->where(function($q) use ($search) {
@@ -242,19 +241,20 @@ class UserController extends Controller
                 ->orWhere('users.email', 'like', '%' . $search . '%');
             });
         }
-
-        // Paginate the result
-        $users = $query->paginate($rowsPerPage, ['*'], 'page', $page);
-
+    
+        $users = $rowsPerPage === 'All'
+            ? $query->get()
+            : $query->paginate($rowsPerPage, ['*'], 'page', $page);
+    
         return response()->json([
-            'data' => $users->items(),
-            'from' => $users->firstItem(),
-            'to' => $users->lastItem(),
-            'total' => $users->total(),
-            'current_page' => $users->currentPage(),
-            'per_page' => $users->perPage(),
-            'prev_page_url' => $users->previousPageUrl(),
-            'next_page_url' => $users->nextPageUrl()
+            'data' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->items() : $users,
+            'from' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->firstItem() : 1,
+            'to' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->lastItem() : count($users),
+            'total' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->total() : count($users),
+            'current_page' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->currentPage() : 1,
+            'per_page' => $rowsPerPage === 'All' ? count($users) : $users->perPage(),
+            'prev_page_url' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->previousPageUrl() : null,
+            'next_page_url' => $users instanceof \Illuminate\Pagination\LengthAwarePaginator ? $users->nextPageUrl() : null
         ]);
-    }
+    }    
 }

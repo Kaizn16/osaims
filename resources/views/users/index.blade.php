@@ -154,7 +154,7 @@
             let currentRole = 'student'; // Default filter
             let searchQuery = '';        // Default search query
             let currentPage = 1;         // Default page
-            let rowsPerPage = 10;        // Default rows per page
+            let rowsPerPage = 'All';      // Default rows per page (fetch all)
             let totalPages = 0;          // Total number of pages
 
             function fetchUsers() {
@@ -165,7 +165,7 @@
                         role: currentRole,
                         search: searchQuery,
                         page: currentPage,
-                        rowsPerPage: rowsPerPage
+                        rowsPerPage: rowsPerPage === 'All' ? 1000 : rowsPerPage // Change this line to a high number if "All" is selected
                     },
                     success: function(response) {
                         let tbody = $('.table-data');
@@ -188,6 +188,8 @@
                                 </tr>
                             `);
                             $('.pagination-info-text').text(`0 - 0 of ${response.total}`);
+                            $('.pagination-actions .back').prop('disabled', true);
+                            $('.pagination-actions .next').prop('disabled', true);
                             return;
                         }
 
@@ -219,7 +221,7 @@
                         const start = response.from || 0;
                         const end = response.to || 0;
                         const total = response.total || 0;
-                        totalPages = response.last_page;
+                        totalPages = Math.ceil(total / (rowsPerPage === 'All' ? total : rowsPerPage)); // Calculate total pages
                         $('.pagination-info-text').text(`${start} - ${end} of ${total}`);
 
                         $('.pagination-actions .back').prop('disabled', currentPage <= 1);
@@ -262,8 +264,8 @@
             });
 
             $('select[name="page_number"]').change(function() {
-                rowsPerPage = $(this).val() === "All" ? 2046 : $(this).val(); // Adjust for "All"
-                currentPage = 1; // Reset to page 1
+                rowsPerPage = $(this).val();
+                currentPage = 1;
                 fetchUsers();
             });
 
