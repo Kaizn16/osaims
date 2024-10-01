@@ -12,7 +12,7 @@
     <!----===== Toasttr CSS ===== -->
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}" />
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <title>{{ config('app.name', 'OSAMIS') }} - {{ Request::path() }}</title>
     @routes
 </head>
@@ -27,8 +27,10 @@
             {{-- PAGE CONTENT GOES HERE --}}
         </section>
     </main>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/toastr.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/navigation.js') }}" defer></script>
+    <script src="{{ asset('assets/js/main.js') }}" defer></script>
     <script src="{{ asset('assets/js/font-awesome-6.6.0-all.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/sweetalert2-11.js') }}" defer></script>
 </body>

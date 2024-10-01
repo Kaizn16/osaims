@@ -21,12 +21,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'suffix',
+        'student_id',
+        'fullname',
+        'department_id',
+        'course_id',
+        'year_level',
         'age',
-        'gender_id',
+        'sex',
         'role_id',
         'position_id',
         'availability_status_id',
@@ -59,9 +60,15 @@ class User extends Authenticatable
         ];
     }
 
-    public function gender()
+
+    public function department()
     {
-        return $this->belongsTo(Gender::class, 'gender_id', 'gender_id');
+        return $this->belongsTo(Departments::class, 'department_id', 'role_id');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Courses::class, 'course_id', 'course_id');
     }
 
     public function role()

@@ -17,17 +17,15 @@ class UserTableSeeder extends Seeder
         $users = [
             [
                 'username' => 'FCU-admin',
-                'first_name' => 'Mark Romel',
-                'middle_name' => 'F',
-                'last_name' => 'Feguro',
-                'suffix' => '',
+                'fullname' => 'Mark Romel F. Feguro',
                 'age' => 23,
-                'gender_id' => 1,
+                'sex' => 'Male',
                 'role_id' => 1,
                 'position_id' => 1,
                 'email' => 'markromelfeguro1@gmail.com',
                 'contact_no' => '09672812221',
                 'password' => Hash::make('@Kaizen123'),
+                'availability_status_id' => 1,
             ],
         ];
 
