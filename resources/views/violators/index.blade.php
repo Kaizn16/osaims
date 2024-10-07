@@ -8,4 +8,4 @@
     </header>
 
 </div>
-@endsections
+@endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\DashboardController;
@@ -7,12 +8,24 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViolatorController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LoginUserController::class, 'login'])->name('login');
-Route::post('/login', [LoginUserController::class, 'store'])->name('login.store');
-Route::post('/', [LoginUserController::class, 'logout'])->name('logout');
+// Landing Page
+Route::prefix('/')->group(function () {
+    Route::get('/', [MainPageController::class, 'index'])->name('index');
+    Route::get('/Registration-Guidelines', [MainPageController::class, 'regestrationGuidelines'])->name('registration.guidelines');
+    Route::get('/Student/Login', [MainPageController::class, 'loginStudent'])->name('login.student');
+});
 
+// Auth
+Route::prefix('Auth')->group(function () {
+    Route::get('/', [LoginUserController::class, 'login'])->name('login');
+    Route::post('/Login/User', [LoginUserController::class, 'store'])->name('login.store');
+    Route::post('/Logout/User', [LoginUserController::class, 'logout'])->name('logout');
+});
+
+// Admin
 Route::prefix('Admin')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('Dashboard', [DashboardController::class, 'index'])->name('Dashboard');
@@ -26,7 +39,7 @@ Route::prefix('Admin')->middleware(['auth', 'admin'])->group(function () {
     Route::put('User/Update/{user_id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('User/Delete/{user_id}', [UserController::class, 'destroy'])->name('user.delete');
 
-    Route::get('Violators', [UserController::class, 'index'])->name('Violators');
+    Route::get('Violators', [ViolatorController::class, 'index'])->name('Violators');
 
     Route::get('Organizations', [OrganizationController::class, 'index'])->name('Organizations');
 
