@@ -8,13 +8,13 @@
                     <img src="{{ asset('storage/Carousel/Student Handbook.PNG') }}" alt="Carousel-Image"> 
                 </div>
                 <div class="item">
-                    <img src="{{ asset('storage/Carousel/Student Handbook.PNG') }}" alt="Carousel-Image"> 
+                    <img src="{{ asset('storage/Carousel/Luke-Dranoel-Artencio-Article-1.webp') }}" alt="Carousel-Image"> 
                 </div>
                 <div class="item">
                     <img src="{{ asset('storage/Carousel/Student Handbook.PNG') }}" alt="Carousel-Image"> 
                 </div>
                 <div class="item">
-                    <img src="{{ asset('storage/Carousel/Student Handbook.PNG') }}" alt="Carousel-Image"> 
+                    <img src="{{ asset('storage/Carousel/Luke-Dranoel-Artencio-Article-1.webp') }}" alt="Carousel-Image"> 
                 </div>
                 <div class="item">
                     <img src="{{ asset('storage/Carousel/Student Handbook.PNG') }}" alt="Carousel-Image"> 

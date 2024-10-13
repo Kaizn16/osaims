@@ -10,15 +10,6 @@
                 <li>
                     <a>OSAIMS Account Creation</a>
                 </li>
-                <li>
-                    Student Organization
-                    <span><i class="fa-solid fa-caret-right sub-icon"></i></span>
-                    <ul class="sub-dropdown"> 
-                        <li><a href="{{ route('registration.guidelines') }}">Registration Guidelines</a></li>
-                        <li><a>Apply For Registration</a></li>
-                        <li><a>Registered Organization</a></li>
-                    </ul>
-                </li>
             </ul>
         </li>
         <li>
@@ -27,6 +18,15 @@
         <li>
             OSA Documents 
             <span><i class="fa-solid fa-caret-right icon"></i></span>
+        </li>
+        <li>
+            Organizations
+            <span><i class="fa-solid fa-caret-right icon"></i></span>
+            <ul class="dropdown">
+                <li><a href="">Registered Organization</a></li>
+                <li><a href="{{ route('apply.org') }}">Apply For Organization</a></li>
+                <li><a href="{{ route('registration.guidelines') }}">Registration Guidelines</a></li>
+            </ul>
         </li>
     </ul>
     <a href="{{ route('login.student') }}" class="login-btn">LOGIN</a>

@@ -23,6 +23,11 @@ class MainPageController extends Controller
     {
         return view('main.login_student');
     }
+
+    public function applyOrganization()
+    {
+        return  view('main.organizations.apply_organization');
+    }
     /**
      * Show the form for creating a new resource.
      */

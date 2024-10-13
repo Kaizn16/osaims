@@ -16,6 +16,7 @@ Route::prefix('/')->group(function () {
     Route::get('/', [MainPageController::class, 'index'])->name('index');
     Route::get('/Registration-Guidelines', [MainPageController::class, 'regestrationGuidelines'])->name('registration.guidelines');
     Route::get('/Student/Login', [MainPageController::class, 'loginStudent'])->name('login.student');
+    Route::get('/Student/Apply-Organization', [MainPageController::class, 'applyOrganization'])->name('apply.org');
 });
 
 // Auth

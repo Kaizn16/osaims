@@ -28,7 +28,12 @@
             @yield('landing-page-content')
         </section>
         <footer class="footer">
-            OSAIMS
+            <strong>OSAIMS</strong>
+            <p>
+                The Office of The Student Affairs Information Management System (OSAIMS) 
+                is a project of Filamer Christian University CCS Students to Modernize OSA for the goal of 
+                making it reliable, available, and easy to access.
+            </p>
         </footer>
     </main>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
